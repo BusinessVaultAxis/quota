@@ -11,11 +11,12 @@ Every push to `main` goes live automatically.
 
 ## How applications work
 The form posts to `/api/apply` on the same domain, so browsers and ad blockers don't block it
-and applicants never leave the page. The function validates the fields and forwards them to
-FormSubmit, which emails them to quotasaleshq@gmail.com.
+and applicants never leave the page. `src/apply.js` validates the fields and emails the
+application to quotasaleshq@gmail.com through Cloudflare Email Routing (`send_email` in
+`wrangler.jsonc`). Each email has the applicant set as Reply-To.
 
-One-time: the first application after a fresh setup makes FormSubmit send an "Activate Form"
-email to quotasaleshq@gmail.com. Click it once.
+Requirement: quotasaleshq@gmail.com must be a **Verified** destination address under
+quotasaleshq.com -> Email -> Email Routing -> Destination addresses.
 
 ## Cloudflare settings
 Connected to this repo through Workers Builds. Cloudflare reads `wrangler.jsonc` and deploys on every push to `main`. No build command needed.

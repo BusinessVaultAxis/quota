@@ -8,6 +8,11 @@
     { "pattern": "quotasaleshq.com", "custom_domain": true },
     { "pattern": "www.quotasaleshq.com", "custom_domain": true }
   ],
+  // Lets the Worker email applications through Cloudflare Email Routing.
+  // quotasaleshq@gmail.com must be a Verified destination address in Email Routing.
+  "send_email": [
+    { "name": "SEND_EMAIL", "destination_address": "quotasaleshq@gmail.com" }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
