@@ -1,5 +1,5 @@
 // Quota application endpoint: POST /api/apply
-// Runs on Cloudflare Pages Functions. The site's form posts here (same domain, so
+// Called from src/worker.js. The site's form posts here (same domain, so
 // browsers and ad blockers don't block it). This code then forwards the application
 // to FormSubmit, which emails it to the recruiting inbox.
 //
@@ -18,7 +18,7 @@ const FIELDS = {
   experience: "Sales experience",
 };
 
-export async function onRequestPost({ request, env }) {
+export async function handleApply(request, env) {
   const wantsJSON = (request.headers.get("accept") || "").includes("application/json");
 
   // Read the form (works for both background sends and plain form posts)
@@ -83,6 +83,3 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-export function onRequestGet({ request }) {
-  return Response.redirect(new URL("/#apply", request.url).toString(), 302);
-}
